@@ -19,7 +19,7 @@ module.exports.getLocationMap = (callback, limit) => {
     return new Promise((resolve, reject) => {
         LocationMap.find((err, res) => {
             if (err) {
-                reject(err)
+                reject(err);
             }
             resolve(res);
         }).limit(limit);
@@ -31,9 +31,21 @@ module.exports.addLocationMap = (locationMap) => {
     return new Promise((resolve, reject) => {
         LocationMap.create(locationMap, (err, documents) => {
             if (err) {
-                reject(err)
+                reject(err);
             }
             resolve(locationMap.length);
         });
     })
+}
+
+// Empty Collection
+module.exports.emptyCollection = () => {
+    return new Promise((resolve, reject) => {
+        LocationMap.remove((err, documents) => {
+            if (err) {
+                reject(err);
+            }
+            resolve("Collection emptied");
+        });
+    })   
 }

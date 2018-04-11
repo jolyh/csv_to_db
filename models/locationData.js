@@ -30,7 +30,7 @@ module.exports.getLocationData = (limit) => {
     return new Promise((resolve, reject) => {
         LocationData.find((err, res) => {
             if (err) {
-                reject(err)
+                reject(err);
             }
             resolve(res);
         }).limit(limit);
@@ -42,9 +42,21 @@ module.exports.addLocationData = (locationData) => {
     return new Promise((resolve, reject) => {
         LocationData.create(locationData, (err, documents) => {
             if (err) {
-                reject(err)
+                reject(err);
             }
         })
         resolve(locationData.length);
     })
+}
+
+// Empty Collection
+module.exports.emptyCollection = () => {
+    return new Promise((resolve, reject) => {
+        LocationData.remove((err, documents) => {
+            if (err) {
+                reject(err);
+            }
+            resolve("Collection emptied");
+        });
+    })   
 }

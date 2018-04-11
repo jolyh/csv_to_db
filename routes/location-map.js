@@ -23,8 +23,8 @@ router.get('/', (req, res) => {
         })
 })
 
-// parse and insert result in db (to do)
-router.get('/upload', (req, res) => {
+// parse and insert result in db
+router.get('/parse', (req, res) => {
     if (!fs.existsSync(filePath)){
         res.send("No corresponding csv file found");
     } else {
@@ -39,6 +39,17 @@ router.get('/upload', (req, res) => {
                 res.json(err);
             })
     }
+})
+
+// empty collection
+router.get('/empty', (req, res) => {
+    locationMap.emptyCollection()
+        .then((result) => {
+            res.json(result);
+        })
+        .catch((err) => {
+            res.json(err);
+        })
 })
 
 module.exports = router;
